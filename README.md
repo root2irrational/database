@@ -1,2 +1,2 @@
 # database
-learning databases and MySQL
+- making a project as I learn databases and MySQL
