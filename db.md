@@ -1,15 +1,16 @@
 # Database Structure
 
-## user:
+## users:
     - user Id
     - user name
+    - user password
 
 ## transactions:
     - transaction Id
     - user Id
     - amount (+ve deposit, -ve withdrawal)
 
-## portfolio:
+## portfolios:
     - portfolio Id
     - user Id
     - instrument Id
@@ -36,7 +37,8 @@
 
 ## trade:
     - trade Id
-    - order Id
+    - order Id1
+    - order Id2
     - user Id
     - instrument Id
     - date
