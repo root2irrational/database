@@ -2,7 +2,9 @@
 import sqlite3
 
 
+global conn
 conn = sqlite3.connect('market.sqlite')
+global c
 c = conn.cursor()
 
 def initialiseDb():

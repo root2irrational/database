@@ -1,100 +1,45 @@
 
 from db import userNameExists, initialiseDb, shutDownDb, registerUser, userPasswordMatch
+from User import User
 import numpy as np
 
-    
-def register():
-    unInvalid: bool = True
-    firstTime: bool = True
-    un: str = None
-    while (unInvalid):
-        if firstTime:
-            print( 
-                    """
-                    To make a new account, 
-                    Enter user name (max limit is 50 characters):
-                    """
-                )
-            firstTime = False
-        else:
-            print( 
-                    """
-                    Invalid user name or username already exists, 
-                    Enter user name (max limit is 50 characters):
-                    """
-                )
-        un = input()
-        unInvalid =  (len(un) > 50 or userNameExists(un))
-        
-    pw: str = None
-    unInvalid: bool = True
-    firstTime: bool = True
-    while (unInvalid):
-        if firstTime:
-            print( 
-                    """
-                    To make a new account, 
-                    Enter password (max limit is 50 characters):
-                    """
-                )
-            firstTime = False
-        else:
-            print( 
-                    """
-                    Invalid password,
-                    Enter password (max limit is 50 characters):
-                    """
-                )
-        pw = input()
-        unInvalid = (len(pw) > 50)
-    registerUser(un, pw)
-    return
 
 def login():
-    unInvalid: bool = True
-    firstTime: bool = True
-    un: str = None
-    while (unInvalid):
-        if firstTime:
-            print( 
-                    """
-                    To Login, 
-                    Enter user name (max limit is 50 characters):
-                    """
-                )
-            firstTime = False
-        else:
-            print( 
-                    """
-                    Invalid user name or username already exists, 
-                    Enter user name (max limit is 50 characters):
-                    """
-                )
-        un = input()
-        unInvalid = not userNameExists(un)
-        
-    pw: str = None
-    unInvalid: bool = True
-    firstTime: bool = True
-    while (unInvalid):
-        if firstTime:
-            print( 
-                    """
-                    To Login, 
-                    Enter password:
-                    """
-                )
-            firstTime = False
-        else:
-            print( 
-                    """
-                    Invalid password, 
-                    Enter password:
-                    """
-                )
-        pw = input()
-        unInvalid = not userPasswordMatch(un, pw)
+    print("Enter your username: (should be 50 characters or less)")
+    un: str = input()
+    print("Enter your password: (should be 50 characters or less)")
+    pw: str = input()
+    user: User = User(un, pw)
+    while (not user.loginValidate()):
+        print("\nInvalid username or password\n")
+        print("Enter your username: (should be 50 characters or less)")
+        un: str = input()
+        print("Enter your password: (should be 50 characters or less)")
+        pw: str = input()
+        user.setUserName(un)
+        user.setPassword(pw)
+    
+    user.registerUser()
     return
+
+def register():
+    print("Enter your username: (should be 50 characters or less)")
+    un: str = input()
+    print("Enter your password: (should be 50 characters or less)")
+    pw: str = input()
+    user: User = User(un, pw)
+    while (not user.registerValidate()):
+        print("\nInvalid username or password\n")
+        print("Enter your username: (should be 50 characters or less)")
+        un: str = input()
+        print("Enter your password: (should be 50 characters or less)")
+        pw: str = input()
+        user.setUserName(un)
+        user.setPassword(pw)
+    
+    user.registerUser()
+    return
+
 
 def main():
     initialiseDb()
